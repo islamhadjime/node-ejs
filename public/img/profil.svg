@@ -1,0 +1,6 @@
+    <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 16 16" fill="none"
+                class="ui-predict-menu__icon">
+                <path fill="currentColor" fill-rule="evenodd"
+                  d="M3.171 5.773a.75.75 0 0 1 1.056-.102L8 8.778l3.773-3.107a.75.75 0 0 1 .954 1.158l-4.25 3.5a.75.75 0 0 1-.954 0l-4.25-3.5a.75.75 0 0 1-.102-1.056Z"
+                  clip-rule="evenodd"></path>
+              </svg>

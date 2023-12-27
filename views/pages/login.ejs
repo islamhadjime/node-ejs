@@ -1,0 +1,44 @@
+<%- include('../partials/head'); %>
+  <%- include('../partials/header'); %>
+
+
+    <div class="login">
+      <div class="login__content">
+        <h2>Войти</h2>
+        <form action="" class="login__form">
+          <div class="login__group">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" placeholder="example@mail.ru">
+          </div>
+          <div class="login__group">
+            <label for="password">Пароль</label>
+            <div class="login__group-pwd">
+              <input type="password" name="password" value="" id="pwd">
+              <button type="button" class="btn icon" id="open__pwd">
+                <img src="/img/pwd-close.svg" alt="" srcset="">
+              </button>
+            </div>
+          </div>
+          <div class="login__group chekin__group">
+            <div class="login__group-chek">
+              <input type="checkbox">
+              <label for="checkbox">Запомнить</label>
+            </div>
+            <a href="">Забыли пароль?</a>
+          </div>
+          <input type="submit" class="btn btn-pwd" value="Войти">
+        </form>
+      </div>
+    </div>
+
+
+    <script>
+      document.querySelector("#open__pwd").addEventListener("click", () => {
+        const typeAttreputePwd = document.querySelector("#pwd")
+        const typeName = typeAttreputePwd.type == 'password' ? 'text' : 'password'
+        typeAttreputePwd.setAttribute('type', typeName)
+      })
+    </script>
+
+
+    <%- include('../partials/footer'); %>

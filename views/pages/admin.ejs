@@ -1,0 +1,57 @@
+<%- include('../partials/head'); %>
+  <%- include('../partials/header'); %>
+
+    <div class="main">
+      <div class="container">
+        <div class="main__content">
+          <div class="asside">
+            <ul class="asside__lister">
+              <h3 class="asside__title">Загрузить отчет</h3>
+              <a href="" class="asside__item">
+                Static
+              </a>
+
+            </ul>
+            <ul class="asside__lister">
+              <h3 class="asside__title">Настройка</h3>
+              <button type="button" class="btn asside__item" id="static-btn">Добавить Статистику</button>
+              <button type="button" class="btn asside__item" id="user-btn">Добавить пользователя</button>
+            </ul>
+          </div>
+          <div class="content">
+            <div class="content__prever">
+              <%- include("../container/static"); %>
+                <%- include("../container/edit"); %>
+                  <%- include("../container/user"); %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script>
+
+      const static_btn = document.querySelector("#static-btn")
+      const user_btn = document.querySelector("#user-btn")
+
+      const static = document.querySelector(".static")
+      const user = document.querySelector(".user")
+      const edit = document.querySelector(".edit")
+
+
+      edit.onclick = () => {
+        static.style.display = 'none'
+        user.style.display = 'none'
+        edit.style.display = 'block'
+
+      }
+
+      document.querySelector("#header__profil-click").addEventListener("click", () => {
+        const profActiv = document.querySelector(".header__profil-top").classList.toggle("header__profil-active")
+      })
+    </script>
+
+    <script src="/js/main.js" defer></script>
+    <%- include('../partials/footer'); %>
