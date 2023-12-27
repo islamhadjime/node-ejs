@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes, Model } = require("sequelize")
 const sequelize = require("../dbconfig")
-const User = require("./User")
-
+const TitleStatic = require("./TitleStatic")
+const moment = require('moment');
 
 class Static extends Model { }
 
@@ -12,14 +12,33 @@ Static.init({
     primaryKey: true,
     autoIncrement: true,
   },
-  numb:{
+  name:{
     type: DataTypes.STRING
   },
-  name: {
+  lessons: {
     type: DataTypes.STRING
   },
-  department: {
+  issuance: {
     type: DataTypes.STRING
+  },
+  those:{
+    type: DataTypes.STRING
+  },
+  maintaining: {
+    type: DataTypes.STRING
+  },
+  marks: {
+    type: DataTypes.STRING
+  },
+  logging:{
+    type:DataTypes.STRING
+  },
+  timely:{
+    type:DataTypes.STRING
+  },
+  date:{
+    type:DataTypes.STRING,
+    allowNull:false,
   }
   },{
     sequelize,
@@ -27,12 +46,9 @@ Static.init({
 })
 
 
-User.hasMany(Static,{
+TitleStatic.hasOne(Static,{
   onDelete:"cascade",
-  name:"static_id",
-  allowNull: true
 })
-
 
 
 module.exports = Static;

@@ -6,25 +6,32 @@ const XLS = require('xlsx');
 
 
 
-// const toSplitJSON = (rems) => { 
-//     const newMaps = []
-//     rems.map( (item) =>{
-//         const obje =  {
-//             numberN : Number(item[0][0]).trim(),
-//             name: String(item[0][1]).trim(),
-//             indefa:String(item[0][2]).trim()
-//         }
-//         newMaps.push(obje)
-//     })
-//     return newMaps
-// }
+const toSplitJSON = (rems) => { 
+    const arrayData = []
+    rems.map((item) =>{
+        if(item.length > 0){
+            const obje = {
+                name: item[1].trim(),
+                lessons:item[2],
+                issuance: item[3],
+                those:item[4],
+                maintaining: item[5],
+                marks:item[6].trim(),
+                logging: item[7],
+                timely:item[8],
+            }
+            arrayData.push(obje)
+        }
+    })
+    return arrayData
+}
 
 
 const readEXL = (file) =>{
     const workbook = XLS.readFile(file);
     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
     const jsonData  = XLS.utils.sheet_to_json(worksheet, { header: 1 });
-    return jsonData.splice(2)
+    return toSplitJSON(jsonData.splice(3))
 }
 
 module.exports = readEXL

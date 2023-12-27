@@ -3,7 +3,7 @@ const express = require("express")
 const cors = require('cors')
 const cookieParser = require("cookie-parser")
 const sequelize = require("./dbconfig")
-const routes = require("./routes/post.routes")
+const routes_admin = require("./routes/admin.routes")
 
 
 const { registerValidator } = require("./validators/registerValidator")
@@ -26,66 +26,8 @@ app.use(cors())
 
 
 
-
-
-// Test file
-
-
-// const Static = require("./models/Static")
-// const path = require('path')
-// const file = path.basename("example.xlsx")
-
-
-
-
-
-
-
-// app.get("/file",async (req,res)=>{
-//   try{
-    
-//     const jsonData = readEXL(file)
-//     res.status(200).json({
-//       message:jsonData
-//     })
-//   }catch(err){
-//     res.status(505).json({
-//       message:"error"
-//     })
-//   }
-  
-// })
-
-
-
-
-
-
-
-//  USER WORK ************************ /
-// app.get("/", middleUser, async (req, res, next) => {
-//   try {
-//     res.status(200).json({
-//       data: "USERS",
-//     })
-
-//   } catch (e) {
-
-//   }
-// })
-
-// app.get("/admin", middleUser, midlleRole, (req, res, next) => {
-//   res.status(200).json({
-//     message: "Доступ админ"
-//   })
-// })
-
-
-
-
-
-
-app.use("/post/v1/",routes)
+// app.use("/admin/v1/",middleUser, midlleRole,routes)
+app.use("/admin/v1/",routes_admin)
 
 
 //  REGISTER USER *************************** /
@@ -96,7 +38,7 @@ app.get("/auth/v1/logout", HomeController.logout)
 
 async function main() {
   try {
-    await sequelize.sync({ force: false })
+    await sequelize.sync({ force: true })
     app.listen(3000, () => {
       console.log("Server start and port 3000");
     })
