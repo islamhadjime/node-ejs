@@ -7,22 +7,21 @@ const middleCheckUser = async (req, res, next) => {
   try {
     const authHeader = req.headers['cookie']
     if (!authHeader) {
-      return res.status(404).json({
-        message: "User sing in"
-      })
+      return res.redirect('/auth/login')
     }
     const cookie = authHeader.split('=')[1]
     jwt.verify(cookie, process.env.SECRET, async (err, decoded) => {
       if (err) {
-        return res
-          .status(401)
-          .json({ message: "This session has expired. Please login" });
+        return res.redirect('/auth/login')
       }
       const user = await User.findOne({
         where: {
           email: decoded.email
         }
       })
+      if(!user){
+        return res.redirect('/auth/login')
+      }
       req.user = user.dataValues
       next()
     })

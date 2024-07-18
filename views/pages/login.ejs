@@ -1,11 +1,10 @@
 <%- include('../partials/head'); %>
-  <%- include('../partials/header'); %>
 
 
     <div class="login">
       <div class="login__content">
         <h2>Войти</h2>
-        <form action="" class="login__form">
+        <form action="/auth/login/" class="login__form" method="post">
           <div class="login__group">
             <label for="email">E-mail</label>
             <input type="email" name="email" placeholder="example@mail.ru">

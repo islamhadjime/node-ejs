@@ -1,0 +1,163 @@
+<div class="edit">
+  <div class="content__prever-top">
+    <h2>Создать отчет</h2>
+    <button type="button" class="btn btn-appender" id="btn-add">
+      добавить
+    </button>
+  </div>
+  <div class="content__prever-table">
+    <table class="table__lister">
+      <thead>
+        <tr>
+          <th>
+            Названия статистики
+            <button type="button" class="icon btn btn-filter">
+              <img src="/img/filter.svg" alt="">
+            </button>
+          </th>
+          <th>
+            Дата создания
+            <button type="button" class="icon btn btn-filter">
+              <img src="/img/filter.svg" alt="">
+            </button>
+          </th>
+          <th>
+            <a href="">
+              Управления
+            </a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i < lister.length; i++) { %>
+          <tr>
+            <td><%= lister[i].title %></td>
+            <td><%= lister[i].date %></td>
+            <td>
+              <a href="/admin/lister/<%=lister[i].id %>" class="btn btn-editer_file">Удалить</a>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+  <div class="content__prever-modal " id="content-modal">
+    <div class="content__prever-body">
+      <div class="content__prever-nexter">
+        <div class="content__prever-title">
+          Создатания отчета
+        </div>
+        <form id="form_modal">
+          <div class="login__group">
+            <label for="firstname">Имя</label>
+            <input type="text" name="title" placeholder="Имя">
+          </div>
+          <div class="content__prever-edit">
+            <div class="content__prever-item">
+              <div class="content__prever-chek">
+                <input type="radio"  class="chek_color id_1" name="min_check" id="green">
+                <input type="radio" class="chek_color id_2" name="min_check" id="yellow">
+                <input type="radio" class="chek_color id_3"name="min_check" id="red">
+              </div>
+              <div class="content__prever-conetn">
+                <p>Мин</p>
+                <div>
+                  <input type="text" name="min" value="60">
+                </div>
+              </div>
+            </div>
+            <div class="content__prever-item">
+              <div class="content__prever-chek">
+                <input type="radio" class="chek_color id_1" name="srt_check" id="green">
+                <input type="radio" class="chek_color id_2" name="srt_check" id="yellow">
+                <input type="radio" class="chek_color id_3"name="srt_check" id="red">
+              </div>
+              <div class="content__prever-conetn">
+                <p>среднее</p>
+                <div>
+                  <input type="text" name="srt" value="60">
+                </div>
+              </div>
+            </div>
+            <div class="content__prever-item">
+              <div class="content__prever-chek">
+                <input type="radio" class="chek_color id_1" name="max_check" id="green">
+                <input type="radio" class="chek_color id_2" name="max_check" id="yellow">
+                <input type="radio" class="chek_color id_3"name="max_check" id="red">
+              </div>
+              <div class="content__prever-conetn">
+                <p>максимальное</p>
+                <div>
+                  <input type="text" name="max" value="90">
+                </div>
+              </div>
+            </div>
+          </div>
+          <input type="submit" class="btn btn-pwd" value="добавить">
+        </form>
+      </div>
+      <button type="button" class="btn btn-modaler" id="btn-remove">
+        <img src="/img/close.svg" alt="">
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .content__prever-body{
+    height: auto;
+  }
+  .login__group{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+</style>
+
+<script>
+
+document.querySelector('#form_modal').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    let min_selectedColor = document.querySelector('input[name="min_check"]:checked').id;
+    let srt_selectedColor = document.querySelector('input[name="srt_check"]:checked').id;
+    let max_selectedColor = document.querySelector('input[name="max_check"]:checked').id;
+    
+    let min_selectNumber = document.querySelector('input[name="min"]').value;
+    let srt_selectNumber = document.querySelector('input[name="srt"]').value;
+    let max_selectNumber = document.querySelector('input[name="max"]').value;
+
+    let title_selectText = document.querySelector('input[name="title"]').value;
+
+
+    const data = {
+      title:title_selectText, 
+      min_check:min_selectedColor,
+      srt_check:srt_selectedColor,
+      max_check:max_selectedColor,
+      min:min_selectNumber,
+      srt:srt_selectNumber,
+      max:max_selectNumber
+    }
+    const res = await fetch('/admin/static/form/', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    if(res.ok){
+     window.location.reload()
+    }
+
+
+
+});
+
+
+</script>
+
+
+<script src="/js/main.js"></script>
+

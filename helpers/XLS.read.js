@@ -5,7 +5,6 @@
 const XLS = require('xlsx');
 
 
-
 const toSplitJSON = (rems) => { 
     const arrayData = []
     rems.map((item) =>{
@@ -26,12 +25,11 @@ const toSplitJSON = (rems) => {
     return arrayData
 }
 
-
 const readEXL = (file) =>{
     const workbook = XLS.readFile(file);
     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
     const jsonData  = XLS.utils.sheet_to_json(worksheet, { header: 1 });
-    return toSplitJSON(jsonData.splice(3))
+    return toSplitJSON(jsonData.splice(2))
 }
 
 module.exports = readEXL

@@ -5,8 +5,8 @@ const dashboard = require('../controllers/control.dash')
 
 
 router.get("/", dashboard.dashGET)
-router.get('/arey/:id/', dashboard.area)
-router.post('/date/', dashboard.datePOST)
+router.get("/detail/:id", dashboard.dashIdGet)
+router.get("/mapsget/:id/", dashboard.mapsGet)
 
 
 module.exports = router

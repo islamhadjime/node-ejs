@@ -1,20 +1,24 @@
 <div class="header">
   <div class="container">
     <div class="header__content">
-      <a href="./manager.html" class="header__logo">
-        <div class="header__logo-img">
-          <img src="/img/logo.png" alt="" srcset="">
-        </div>
+      <a href="/" class="header__logo">
         LOGO
       </a>
       <div class="header__left">
-        <form action="" class="header__kalend">
-          <input type="week" name="week" id="camp-week" />
-          <input type="submit" class="btn btn-form" value="Показать">
-        </form>
+        <div class="form__input-week" id="input-week">
+          <div>
+            <span id="start_date"><%=startDate %></span>
+            <span>по</span>
+            <span id="end__date"><%=endDate %></span>
+          </div>
+          <input type="week" name="date" id="camp-week" />
+        </div>
         <div class="header__profil">
           <div class="header__img">
-            <img src="/img/profil.jpg" alt="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+            </svg>
           </div>
           <button type="button" class="btn btn-profil" id="header__profil-click">
             <img src="/img/profil.svg" alt="" srcset="">
@@ -22,16 +26,67 @@
           <div class="header__profil-top">
             <div class="header__top-pr">
               <div class="header__img">
-                <img src="/img/profil.jpg" alt="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                </svg>
               </div>
               <p>
                 iktruoshali@mail.ru
               </p>
             </div>
-            <a href="./login.html">выйти</a>
+            <a href="/admin/">Админ панель</a> <br>
+            <a href="/auth/logout/">выйти</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+    const dateResult = (weekNumber) =>{
+    const [year, week] = weekNumber.split('-W');
+    const startOfWeek = new Date(`${year}-01-01`);
+    startOfWeek.setDate(1 + (7 - startOfWeek.getDay() + 1) % 7);
+    startOfWeek.setDate(startOfWeek.getDate() + (week - 1) * 7);
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 7);
+    const formattedStartDate = startOfWeek.toLocaleDateString('ru-RU');
+    const formattedEndDate = endOfWeek.toLocaleDateString('ru-RU');
+      return {
+        formattedStartDate,
+        formattedEndDate
+      }
+  }
+
+
+
+
+  
+
+//  weekInput.showPicker()
+function showWeekPicker() {
+  const weekInput = document.getElementById("camp-week");
+  weekInput.showPicker();
+}
+
+function getSelectedWeek() {
+  const weekInput = document.getElementById("camp-week");
+  return postElement(weekInput.value)
+
+}
+
+document.querySelector("#input-week").addEventListener('click',showWeekPicker)
+document.querySelector("#input-week").addEventListener('change',getSelectedWeek)
+
+
+function postElement(date) {
+  const { formattedStartDate,formattedEndDate } = dateResult(date)
+    const hrefId = window.location.pathname.split('/')
+    const id = hrefId[hrefId.length-1]
+    window.location.href = `http://localhost:3000/detail/${id}?startDate=${formattedStartDate}&endDate=${formattedEndDate}`
+}
+ 
+
+</script>

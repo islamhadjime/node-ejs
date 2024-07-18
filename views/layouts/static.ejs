@@ -1,0 +1,87 @@
+<div class="static">
+  <div class="content__prever-top">
+    <h2>Загрузить отчет в <%=title %> </h2>
+    <button type="button" class="btn btn-appender" id="btn-add">
+      добавить
+    </button>
+  </div>
+  <div class="content__prever-table">
+    <table class="table__lister">
+      <thead>
+        <tr>
+          <th>
+            Переуд
+            <button type="button" class="icon btn btn-filter">
+              <img src="/img/filter.svg" alt="">
+            </button>
+          </th>
+          <th>
+            Количество школ
+            <button type="button" class="icon btn btn-filter">
+              <img src="/img/filter.svg" alt="">
+            </button>
+          </th>
+          <th>
+          Среднее значения
+            <button type="button" class="icon btn btn-filter">
+              <img src="/img/filter.svg" alt="">
+            </button>
+          </th>
+          <th>
+            Количество школ
+            <button type="button" class="icon btn btn-filter">
+              <img src="/img/filter.svg" alt="">
+            </button>
+          </th>
+          <th>
+            <a href="">
+              Настройка
+            </a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i < data.length; i++) { %>
+          <tr>
+            <td><%= data[i].dataValues.date %></td>
+            <td><%= data[i].dataValues.school %></td>
+            <td>
+              <%= data[i].dataValues.formattedStartDate %> <br>
+              <%= data[i].dataValues.formattedEndDate %>
+            </td>
+
+            <td><%= data[i].dataValues.srt_lessons %></td>
+            <td>
+              <a href="/admin/static/del/<%=data[i].dataValues.indeficator %>" class="btn btn-editer_file">Удалить</a>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+  <div class="content__prever-modal" id="content-modal">
+    <div class="content__prever-body">
+      <div class="content__prever-nexter">
+        <div class="content__prever-title">
+          Загрузить отчет
+        </div>
+        <form action="/admin/file/<%=id_lister %>" method="post" enctype="multipart/form-data" >
+          <div class="date">
+            <p>Выбирете переуд</p>
+            <input type="week" name="date" id="camp-week" />
+            <input type="submit" class="btn btn-form" value="Показать">
+          </div>
+          <input type="file"   name="file" class="content__prever-download_file">
+          <input type="submit" class="btn btn-pwd" value="добавить">
+        </form>
+      </div>
+      <button type="button" class="btn btn-modaler" id="btn-remove">
+        <img src="/img/close.svg" alt="">
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="/js/main.js"></script>

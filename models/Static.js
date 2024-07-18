@@ -10,7 +10,9 @@ Static.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: true,
+  },
+  indeficator:{
+    type: DataTypes.STRING
   },
   name:{
     type: DataTypes.STRING
@@ -36,13 +38,19 @@ Static.init({
   timely:{
     type:DataTypes.STRING
   },
+  formattedStartDate:{
+    type:DataTypes.STRING
+  },
+  formattedEndDate:{
+    type:DataTypes.STRING
+  },
   date:{
     type:DataTypes.STRING,
     allowNull:false,
   }
   },{
     sequelize,
-    defaultValue:"Static"
+    modelName:"Static"
 })
 
 

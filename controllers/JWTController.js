@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 exports.JWTController = {
 
-
   createToken(email, role, refresh = false) {
     const payload = {
       email,

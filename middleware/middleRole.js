@@ -6,10 +6,7 @@ const middleCheckRole = (req, res, next) => {
     const user = req.user;
     const { role } = user;
     if (role !== "ADMIN") {
-      return res.status(401).json({
-        status: "failed",
-        message: "You are not authorized to view this page.",
-      });
+      return res.redirect("/");
     }
     next();
   } catch (err) {

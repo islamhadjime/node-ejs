@@ -1,48 +1,22 @@
-const bcrypt = require("bcrypt");
-
-
+const bcryptjs = require("bcryptjs");
 const User = require("../models/User");
 const { JWTController } = require("./JWTController")
 
 
 exports.HomeController = {
 
-  async register(req, res, next) {
+  async loginGET(req,res){
     try {
-      const user = await User.findOne({
-        where: {
-          email: req.body.email
-        }
-      })
-      if (user) {
-        return res
-          .status(400)
-          .json({ errors: { msg: "User account already exists" } });
-      }
-
-      const hashedPassword = bcrypt.hashSync(req.body.password, 10)
-
-      const newUser = await User.create({
-        firstname: req.body.firstname,
-        email: req.body.email,
-        password: hashedPassword,
-        role: req.body.role,
-      });
-
-
-      res.status(200).json({
-        data: {
-          user: newUser
-        }
-      })
-
+      res.render('pages/login', {})
     } catch (e) {
-      console.log(e);
-      next(e)
+      res.status(500).json({
+        status: "error",
+        code: 500,
+        data: [],
+        message: "Internal Server Error",
+      })
     }
-
   },
-
   async login(req, res) {
     const user = await User.findOne({
       where: {
@@ -54,7 +28,7 @@ exports.HomeController = {
         message: "Plise register"
       })
     }
-    const validPassword = bcrypt.compareSync(req.body.password, user.password)
+    const validPassword = bcryptjs.compareSync(req.body.password, user.password)
     if (!validPassword) {
       return res.status(400).json({ message: `Введен неверный пароль` })
     }
@@ -65,18 +39,12 @@ exports.HomeController = {
       secure: true,
       sameSite: "None",
     })
-    res.status(200).json({
-      data: {
-        token: token.access_token,
-        user: user
-      }
-    })
+    res.redirect("/")
   },
-
   async logout(req, res) {
     try {
       res.clearCookie("SessionID");
-      res.status(200).json({ message: 'You are logged out!' });
+      res.redirect("/auth/login")
     } catch (err) {
       res.status(500).json({
         status: 'error',
@@ -84,7 +52,6 @@ exports.HomeController = {
       });
     }
   }
-
 
 
 }

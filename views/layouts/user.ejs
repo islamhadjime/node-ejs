@@ -1,0 +1,110 @@
+<div class="users">
+  <div class="content__prever-top">
+    <h2>Пользователи </h2>
+    <button type="button" class="btn btn-appender" id="btn-add">
+      добавить
+    </button>
+  </div>
+  <div class="content__prever-table">
+    <table class="table__lister">
+      <thead>
+        <tr>
+          <th>
+            Имя пользователя
+            <button type="button" class="icon btn btn-filter">
+              <img src="./assets/img/filter.svg" alt="">
+            </button>
+          </th>
+          <th>
+            email
+            <button type="button" class="icon btn btn-filter">
+              <img src="./assets/img/filter.svg" alt="">
+            </button>
+          </th>
+          <th>
+            роль
+            <button type="button" class="icon btn btn-filter">
+              <img src="./assets/img/filter.svg" alt="">
+            </button>
+          </th>
+          <th>
+            <a href="">
+              Настройка
+            </a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i < users.length; i++) { %>
+          <tr>
+            <td><%= users[i].firstname %></td>
+            <td><%= users[i].email %></td>
+            <td><%= users[i].role %></td>
+            <td>
+              <a href="/admin/user/del/<%=users[i].id %>" class="btn btn-editer_file">Удалить</a>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+  <div class="content__prever-modal" id="content-modal">
+    <div class="content__prever-body">
+      <div class="content__prever-nexter">
+        <div class="content__prever-title">
+          Добавить пользователя
+        </div>
+        <form action="/admin/user/" method="post">
+          <div class="login__group">
+            <label for="firstname">Имя</label>
+            <input type="text" name="firstname" placeholder="Имя">
+          </div>
+          <div class="login__group">
+            <label for="email">E-mail</label>
+            <input type="text" name="email" placeholder="example@mail.ru">
+          </div>
+          <div class="login__group">
+            <label for="password">Пароль</label>
+            <input type="password" name="password" placeholder="...">
+          </div>
+          <div class="login__group">
+            <label for="role">Роль пользователя</label>
+            <select name="role" id="">
+              <option value="" disabled>Выбирете роль пользователя</option>
+              <option value="USER">Пользователь</option>
+              <option value="ADMIN">Администратор</option>
+            </select>
+          </div>
+          <input type="submit" class="btn btn-pwd" value="Зарегистрировать">
+        </form>
+      </div>
+      <button type="button" class="btn btn-modaler" id="btn-remove">
+        <img src="/img/close.svg" alt="">
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .content__prever-body{
+    height: auto;
+  }
+  .login__group{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .login__group input{
+    width: 100%;
+  }
+  .login__group select{
+    margin-top: 8px;
+    width: 100%;
+    border: 1px solid #8a919e;
+    padding: 10px;
+    border-radius: 5px;
+  }
+</style>
+
+<script src="/js/main.js"></script>

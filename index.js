@@ -2,8 +2,9 @@ require("dotenv").config()
 const express = require("express")
 const cors = require('cors')
 const cookieParser = require("cookie-parser")
-const sequelize = require("./dbconfig")
+const expressLayouts = require('express-ejs-layouts')
 
+const sequelize = require("./dbconfig")
 
 const midlleRole = require("./middleware/middleRole")
 const middleUser = require("./middleware/middleUser")
@@ -21,16 +22,18 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"))
 
 
-
-// app.use("/admin/v1/",middleUser, midlleRole,routes)
-app.use("/", routes_dash)
+// USE GET midlleRole/middleUser
+app.use("/",routes_dash)
 app.use("/admin/", routes_admin)
 app.use("/auth/", routes_auth)
 
+
+
+
 async function main() {
   try {
-    await sequelize.sync({ force: false })
-    app.listen(3000, () => {
+    await sequelize.sync({ force: true })
+    app.listen(4000, () => {
       console.log("Server start and port 3000");
     })
   } catch (e) {
