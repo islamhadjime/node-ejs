@@ -3,7 +3,7 @@
 ![Alt-текст](https://github.com/islamhadjime/node-ejs/blob/fron/public/img/assets.png "Card")
 
 
-# 🛠 Технологии:
+# 🛠 Technologies
 
 - **Express**
 - **PostgreSQL**
